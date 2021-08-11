@@ -31,6 +31,3 @@ jobs:
 
       - name: Run codecov
         uses: codecov/codecov-action@v1
-        with:
-          file: ./coverage/lcov-report/index.html
-          token: ${{ secrets.CODECOV_TOKEN }}
