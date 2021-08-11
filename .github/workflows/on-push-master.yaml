@@ -1,7 +1,7 @@
-name: Node-pr-checker
+name: Node-on-push-main
 
 on:
-  pull_request:
+  push:
     branches: [main]
 
 jobs:
