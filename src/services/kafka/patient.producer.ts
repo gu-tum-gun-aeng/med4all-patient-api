@@ -1,5 +1,5 @@
 import { CreatePatientDto } from '@/dtos/patient.dto';
-import { Kafka } from 'kafkajs';
+import { Kafka, RecordMetadata } from 'kafkajs';
 
 const kafka = new Kafka({
   clientId: 'med4all-patient-api',
@@ -13,9 +13,9 @@ const kafka = new Kafka({
 
 const producer = kafka.producer();
 
-export const producePatient = async (patient: CreatePatientDto) => {
+export const producePatient = async (patient: CreatePatientDto): Promise<RecordMetadata[]> => {
   await producer.connect();
-  await producer.send({
+  return await producer.send({
     topic: 'patient.raw.main',
     messages: [{ value: JSON.stringify(patient) }],
   });

@@ -37,6 +37,7 @@
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
     "routing-controllers-openapi": "^3.0.0",
+    "sinon": "^11.1.2",
     "swagger-ui-express": "^4.1.6",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.0.0",
