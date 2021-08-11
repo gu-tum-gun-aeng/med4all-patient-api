@@ -1,7 +1,7 @@
 import request from 'supertest';
 import App from '@/app';
 import sinon from 'sinon';
-import patientModel from '@/tests/mock/patient.mock.test';
+import patientModel from '@/tests/mock/patient.mock';
 import { PatientController } from '@controllers/patient.controller';
 import * as patientProducer from '@/services/kafka/patient.producer';
 
