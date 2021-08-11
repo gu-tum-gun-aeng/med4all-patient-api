@@ -24,4 +24,9 @@ jobs:
         run: npm run lint
 
       - name: Run unit tests
-        run: npm test
+        run: jest --coverage
+
+      - name: Run codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage/lcov-report/index.html
