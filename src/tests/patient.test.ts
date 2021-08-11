@@ -1,7 +1,7 @@
 import request from 'supertest';
 import App from '@/app';
 import sinon from 'sinon';
-import patientModel from '@/tests/mock/patient.mock.test';
+import * as patientMock from '@/tests/mock/patient.mock';
 import { PatientController } from '@controllers/patient.controller';
 import * as patientProducer from '@/services/kafka/patient.producer';
 
@@ -9,12 +9,48 @@ afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
 
+afterEach(async () => {
+  sinon.restore();
+});
+
 describe('Testing Patient', () => {
   describe('[POST] /patient', () => {
-    it('response statusCode 200', () => {
+    it('using valid request with PersonID should response statusCode 200', async () => {
       const app = new App([PatientController]);
       sinon.stub(patientProducer, 'producePatient').returns(Promise.resolve([]));
-      return request(app.getServer()).post('/patient').send(patientModel.pop()).expect(200);
+      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonIDMock);
+      expect(response.status).toBe(200);
+    });
+
+    it('using valid request with ForeignID should response statusCode 200', async () => {
+      const app = new App([PatientController]);
+      sinon.stub(patientProducer, 'producePatient').returns(Promise.resolve([]));
+      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonForeignIDMock);
+      expect(response.status).toBe(200);
+    });
+
+    it('using valid request with PassportID should response statusCode 200', async () => {
+      const app = new App([PatientController]);
+      sinon.stub(patientProducer, 'producePatient').returns(Promise.resolve([]));
+      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonPassportIDMock);
+      expect(response.status).toBe(200);
+    });
+
+    it('using invalid request without any ID should response statusCode 400', async () => {
+      const app = new App([PatientController]);
+      sinon.stub(patientProducer, 'producePatient').returns(Promise.resolve([]));
+      const response = await request(app.getServer()).post('/patient').send(patientMock.invalidPatientRequestWithoutAnyIDMock);
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe('One of PersonID or PassportID or ForeignID is required');
+    });
+
+    it('when patient producer got error should response statusCode 500', async () => {
+      const app = new App([PatientController]);
+      const error = new Error('This is error message');
+      sinon.stub(patientProducer, 'producePatient').throws(error);
+      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonIDMock);
+      expect(response.status).toBe(500);
+      expect(response.body.message).toBe('This is error message');
     });
   });
 });
