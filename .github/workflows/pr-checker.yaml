@@ -1,4 +1,4 @@
-name: Deno-pr-checker
+name: Node-pr-checker
 
 on:
   pull_request:
@@ -33,3 +33,4 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           file: ./coverage/lcov-report/index.html
+          token: ${{ secrets.CODECOV_TOKEN }}
