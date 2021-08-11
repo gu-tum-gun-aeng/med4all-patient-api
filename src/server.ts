@@ -10,4 +10,4 @@ import { PatientController } from './controllers/patient.controller';
 validateEnv();
 
 const app = new App([IndexController, PatientController]);
-app.listen();
+app.initializeKafka().then(() => app.listen());
