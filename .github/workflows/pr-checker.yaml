@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Run linter
-        run: npm run lint
-
       - name: Install dependencies
         run: npm install
+
+      - name: Run linter
+        run: npm run lint
 
       - name: Run unit tests
         run: npm test
