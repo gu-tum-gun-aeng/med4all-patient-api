@@ -38,12 +38,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Git pull to get latest tag
-        run: git pull
-
-      - name: Set git tag release version
-        run: echo "RELEASE_VERSION=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-
       - name: Build docker images using cache
         env:
           IMAGE_NAME: ${{ github.event.repository.name }}
@@ -51,6 +45,15 @@ jobs:
         with:
           username: "${{ secrets.AWS_ACCESS_KEY_ID }}"
           password: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-          registry: 950124295708.dkr.ecr.ap-southeast-1.amazonaws.com
+          registry: 607128906826.dkr.ecr.ap-southeast-1.amazonaws.com
           image_name: ${{ env.IMAGE_NAME }}
           image_tag: latest,${{ env.RELEASE_VERSION }}
+
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
