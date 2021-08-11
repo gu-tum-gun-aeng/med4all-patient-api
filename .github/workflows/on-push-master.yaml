@@ -37,7 +37,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v5.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
+          
       - name: Build docker images using cache
         env:
           IMAGE_NAME: ${{ github.event.repository.name }}
@@ -47,7 +47,7 @@ jobs:
           password: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           registry: 607128906826.dkr.ecr.ap-southeast-1.amazonaws.com
           image_name: ${{ env.IMAGE_NAME }}
-          image_tag: latest,${{ env.RELEASE_VERSION }}
+          image_tag: lastest,${{ steps.tag_version.outputs.new_tag }}
 
       - name: Create a GitHub release
         uses: actions/create-release@v1
