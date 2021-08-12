@@ -1,65 +1,50 @@
+import Logger, * as bunyan from 'bunyan';
 import config from 'config';
-import fs from 'fs';
-import path from 'path';
-import winston from 'winston';
-import winstonDaily from 'winston-daily-rotate-file';
+import { IncomingMessage, ServerResponse } from 'http';
+import morgan from 'morgan';
+import rTracer from 'cls-rtracer';
+import * as os from 'os';
 
-// logs dir
-const logDir: string = path.join(__dirname, config.get('log.dir'));
-
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
-}
-
-// Define log format
-const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
-
-/*
- * Log Level
- * error: 0, warn: 1, info: 2, http: 3, verbose: 4, debug: 5, silly: 6
- */
-const logger = winston.createLogger({
-  format: winston.format.combine(
-    winston.format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss',
-    }),
-    logFormat,
-  ),
-  transports: [
-    // debug log setting
-    new winstonDaily({
-      level: 'debug',
-      datePattern: 'YYYY-MM-DD',
-      dirname: logDir + '/debug', // log file /logs/debug/*.log in save
-      filename: `%DATE%.log`,
-      maxFiles: 30, // 30 Days saved
-      json: false,
-      zippedArchive: true,
-    }),
-    // error log setting
-    new winstonDaily({
-      level: 'error',
-      datePattern: 'YYYY-MM-DD',
-      dirname: logDir + '/error', // log file /logs/error/*.log in save
-      filename: `%DATE%.log`,
-      maxFiles: 30, // 30 Days saved
-      handleExceptions: true,
-      json: false,
-      zippedArchive: true,
-    }),
-  ],
+export const logger: Logger = bunyan.createLogger({
+  level: config.get('log.level'),
+  name: config.get('app.name'),
+  serializers: {
+    http: bunyan.stdSerializers.req,
+  },
 });
 
-logger.add(
-  new winston.transports.Console({
-    format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
-  }),
-);
+morgan.token('hostname', function getHostname() {
+  return os.hostname();
+});
 
-const stream = {
-  write: (message: string) => {
-    logger.info(message.substring(0, message.lastIndexOf('\n')));
-  },
+morgan.token('pid', function getPid() {
+  return process.pid.toString();
+});
+
+export const morganJsonFormat: morgan.FormatFn<IncomingMessage, ServerResponse> = (tokens, req, res) => {
+  return JSON.stringify({
+    v: 0,
+    name: config.get('app.name'),
+    msg: `[CALL ${tokens.url(req, res)} - END]`,
+    level: 30,
+    hostname: tokens['hostname'](req, res),
+    pid: tokens['pid'](req, res),
+    time: tokens['date'](req, res, 'iso'),
+    target: `${config.get('app.name')}::route::${tokens['url'](req, res).substr(1)}`,
+    request_id: rTracer.id(),
+    elapsed_milliseconds: tokens['response-time'](req, res),
+    'http.method': tokens.method(req, res),
+    'http.user_agent': tokens['user-agent'](req, res),
+    'http.target': tokens['url'](req, res),
+    'http.client_ip': tokens['remote-addr'](req, res),
+    'http.host': tokens['hostname'](req, res),
+    'http.route': tokens['url'](req, res),
+    'http.flavor': tokens['http-version'](req, res),
+  });
 };
 
-export { logger, stream };
+export const morganStream = {
+  write: (message: string) => {
+    console.log(message);
+  },
+};

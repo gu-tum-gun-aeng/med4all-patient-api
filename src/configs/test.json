@@ -1,9 +1,11 @@
 {
+    "app": {
+        "name": "med4all-patient-api"
+    },
     "env": "test",
     "secretKey": "secretKey",
     "log": {
-        "format": "dev",
-        "dir": "../logs"
+        "level": "debug"
     },
     "cors": {
         "origin": true,

@@ -7,14 +7,15 @@ import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import morgan from 'morgan';
 import { getMetadataArgsStorage, useExpressServer } from 'routing-controllers';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import swaggerUi from 'swagger-ui-express';
 import errorMiddleware from '@middlewares/error.middleware';
-import { logger, stream } from '@utils/logger';
+import { logger, morganStream, morganJsonFormat } from '@utils/logger';
 import kafkaUtil from './utils/kafka';
 import { reviveDates } from './utils/date';
+import rTracer from 'cls-rtracer';
+import morgan from 'morgan';
 
 class App {
   public app: express.Application;
@@ -46,7 +47,8 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(config.get('log.format'), { stream }));
+    this.app.use(rTracer.expressMiddleware());
+    this.app.use(morgan(morganJsonFormat, { stream: morganStream }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
