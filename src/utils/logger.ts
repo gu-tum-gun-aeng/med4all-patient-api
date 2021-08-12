@@ -26,7 +26,7 @@ export const morganJsonFormat: morgan.FormatFn<IncomingMessage, ServerResponse> 
     v: 0,
     name: config.get('app.name'),
     msg: `[CALL ${tokens.url(req, res)} - END]`,
-    level: 30,
+    level: bunyan.TRACE,
     hostname: tokens['hostname'](req, res),
     pid: tokens['pid'](req, res),
     time: tokens['date'](req, res, 'iso'),
