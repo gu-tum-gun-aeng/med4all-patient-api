@@ -4,6 +4,10 @@
 [![codecov](https://codecov.io/gh/gu-tum-gun-aeng/med4all-patient-api/branch/main/graph/badge.svg?token=E9B0MTFVOQ)](https://codecov.io/gh/gu-tum-gun-aeng/med4all-patient-api)
 ## Development
 
+### prepare env
+
+- copy file `.env.example` and change its name to `.env`
+
 ### run node locally
 
 - just `npm run dev`
