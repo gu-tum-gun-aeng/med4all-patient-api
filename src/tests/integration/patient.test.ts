@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import * as patientMock from '@/tests/mock/patient.mock';
 import { PatientController } from '@controllers/patient.controller';
 import kafkaUtil from '@/utils/kafka';
+import { invalidAuthHeaderMock, validAuthHeaderMock } from '../mock/auth.mock';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -15,31 +16,60 @@ afterEach(async () => {
 
 describe('Testing Patient', () => {
   describe('[POST] /patient', () => {
-    it('using valid request with PersonID should response statusCode 200', async () => {
+    it('without any auhorization header should response 404', async () => {
       const app = new App([PatientController]);
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
       const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonIDMock);
+      expect(response.status).toBe(404);
+    });
+
+    it('with invalid auhorization header should response 401', async () => {
+      const app = new App([PatientController]);
+      sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
+      const response = await request(app.getServer())
+        .post('/patient')
+        .set('Authorization', invalidAuthHeaderMock)
+        .send(patientMock.validPatientRequestWithPersonIDMock);
+      expect(response.status).toBe(401);
+    });
+
+    it('using valid request with PersonID should response statusCode 200', async () => {
+      const app = new App([PatientController]);
+      sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
+      const response = await request(app.getServer())
+        .post('/patient')
+        .set('Authorization', validAuthHeaderMock)
+        .send(patientMock.validPatientRequestWithPersonIDMock);
       expect(response.status).toBe(200);
     });
 
     it('using valid request with ForeignID should response statusCode 200', async () => {
       const app = new App([PatientController]);
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
-      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonForeignIDMock);
+      const response = await request(app.getServer())
+        .post('/patient')
+        .set('Authorization', validAuthHeaderMock)
+        .send(patientMock.validPatientRequestWithPersonForeignIDMock);
       expect(response.status).toBe(200);
     });
 
     it('using valid request with PassportID should response statusCode 200', async () => {
       const app = new App([PatientController]);
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
-      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonPassportIDMock);
+      const response = await request(app.getServer())
+        .post('/patient')
+        .set('Authorization', validAuthHeaderMock)
+        .send(patientMock.validPatientRequestWithPersonPassportIDMock);
       expect(response.status).toBe(200);
     });
 
     it('using invalid request without any ID should response statusCode 400', async () => {
       const app = new App([PatientController]);
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
-      const response = await request(app.getServer()).post('/patient').send(patientMock.invalidPatientRequestWithoutAnyIDMock);
+      const response = await request(app.getServer())
+        .post('/patient')
+        .set('Authorization', validAuthHeaderMock)
+        .send(patientMock.invalidPatientRequestWithoutAnyIDMock);
       expect(response.status).toBe(400);
       expect(response.body.message).toBe('One of PersonID or PassportID or ForeignID is required');
     });
@@ -48,7 +78,10 @@ describe('Testing Patient', () => {
       const app = new App([PatientController]);
       const error = new Error('This is error message');
       sinon.stub(kafkaUtil, 'send').throws(error);
-      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonIDMock);
+      const response = await request(app.getServer())
+        .post('/patient')
+        .set('Authorization', validAuthHeaderMock)
+        .send(patientMock.validPatientRequestWithPersonIDMock);
       expect(response.status).toBe(500);
       expect(response.body.message).toBe('This is error message');
     });
