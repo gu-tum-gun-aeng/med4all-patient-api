@@ -7,7 +7,7 @@ describe('Testing Token Util', () => {
     it('should create valid Token with given token id when call', async () => {
       const tokenInfo = {
         id: '123',
-        ttlSeconds: 60,
+        ttlSeconds: 157680000,
         hashAlgorithm: HashAlgorithm.HS256,
       };
 
