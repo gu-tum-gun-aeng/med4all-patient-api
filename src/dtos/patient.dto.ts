@@ -39,8 +39,7 @@ export class CreatePatientDto {
   public cdPersonGenderCode?: number;
 
   @IsNumber()
-  @IsOptional()
-  public cdPersonAge?: number;
+  public cdPersonAge: number;
 
   @IsString()
   @IsOptional()

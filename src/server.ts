@@ -1,5 +1,3 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
-
 import dotenv from 'dotenv';
 import 'reflect-metadata';
 import App from '@/app';

@@ -3,12 +3,11 @@
         "name": "med4all-patient-api"
     },
     "env": "production",
-    "secretKey": "secretKey",
     "log": {
         "level": "trace"
     },
     "cors": {
-        "origin": "your.domain.com",
+        "origin": "api.med4all.care",
         "credentials": true
     },
     "kafka": {

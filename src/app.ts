@@ -1,5 +1,3 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
-
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
