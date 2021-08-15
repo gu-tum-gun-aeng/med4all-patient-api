@@ -8,7 +8,6 @@ import { Body, Controller, HttpCode, Post, Req, UseBefore } from 'routing-contro
 @Controller()
 export class PatientController {
   @Post('/patient')
-  @UseBefore(authMiddleware)
   @UseBefore(patientValidationMiddleware)
   @HttpCode(200)
   async create(@Body() patientData: CreatePatientDto, @Req() req: Request) {

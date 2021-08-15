@@ -16,29 +16,12 @@ afterEach(async () => {
 
 describe('Testing Patient', () => {
   describe('[POST] /patient', () => {
-    it('without any auhorization header should response 404', async () => {
-      const app = new App([PatientController]);
-      sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
-      const response = await request(app.getServer()).post('/patient').send(patientMock.validPatientRequestWithPersonIDMock);
-      expect(response.status).toBe(404);
-    });
-
-    it('with invalid auhorization header should response 401', async () => {
-      const app = new App([PatientController]);
-      sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
-      const response = await request(app.getServer())
-        .post('/patient')
-        .set('Authorization', invalidAuthHeaderMock)
-        .send(patientMock.validPatientRequestWithPersonIDMock);
-      expect(response.status).toBe(401);
-    });
 
     it('using valid request with PersonID should response statusCode 200', async () => {
       const app = new App([PatientController]);
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
       const response = await request(app.getServer())
         .post('/patient')
-        .set('Authorization', validAuthHeaderMock)
         .send(patientMock.validPatientRequestWithPersonIDMock);
       expect(response.status).toBe(200);
     });
@@ -48,7 +31,6 @@ describe('Testing Patient', () => {
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
       const response = await request(app.getServer())
         .post('/patient')
-        .set('Authorization', validAuthHeaderMock)
         .send(patientMock.validPatientRequestWithPersonForeignIDMock);
       expect(response.status).toBe(200);
     });
@@ -58,7 +40,6 @@ describe('Testing Patient', () => {
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
       const response = await request(app.getServer())
         .post('/patient')
-        .set('Authorization', validAuthHeaderMock)
         .send(patientMock.validPatientRequestWithPersonPassportIDMock);
       expect(response.status).toBe(200);
     });
@@ -68,7 +49,6 @@ describe('Testing Patient', () => {
       sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
       const response = await request(app.getServer())
         .post('/patient')
-        .set('Authorization', validAuthHeaderMock)
         .send(patientMock.invalidPatientRequestWithoutAnyIDMock);
       expect(response.status).toBe(400);
       expect(response.body.message).toBe('One of PersonID or PassportID or ForeignID is required');
@@ -80,7 +60,6 @@ describe('Testing Patient', () => {
       sinon.stub(kafkaUtil, 'send').throws(error);
       const response = await request(app.getServer())
         .post('/patient')
-        .set('Authorization', validAuthHeaderMock)
         .send(patientMock.validPatientRequestWithPersonIDMock);
       expect(response.status).toBe(500);
       expect(response.body.message).toBe('This is error message');
