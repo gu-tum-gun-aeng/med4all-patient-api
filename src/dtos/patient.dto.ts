@@ -350,21 +350,21 @@ export class CreatePatientDto {
   @IsOptional()
   public emMoveToLocationCode?: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  public emMoveToLocationTypeCode?: number;
+  public emMoveToLocationTypeCode?: string;
 
   @IsString()
   @IsOptional()
   public emMoveFromLocationCode?: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  public emMoveFromLocationTypeCode?: number;
+  public emMoveFromLocationTypeCode?: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  public emMoveToMethodCode?: number;
+  public emMoveToMethodCode?: string;
 
   @IsNumber()
   @IsOptional()
