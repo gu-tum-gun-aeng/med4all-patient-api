@@ -6,7 +6,6 @@ export const validPatientRequestWithPersonIDMock: CreatePatientDto = {
   cdPersonLastName: 'Doe',
   cdPersonAge: 30,
   cdPersonPhone1: '0811231234',
-  emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
 };
@@ -17,7 +16,6 @@ export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
   cdPersonLastName: 'Doe',
   cdPersonAge: 30,
   cdPersonPhone1: '0811231234',
-  emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
 };
@@ -28,7 +26,6 @@ export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
   cdPersonLastName: 'Doe',
   cdPersonAge: 30,
   cdPersonPhone1: '0811231234',
-  emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
 };
@@ -38,7 +35,6 @@ export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
   cdPersonLastName: 'Doe',
   cdPersonAge: 30,
   cdPersonPhone1: '0811231234',
-  emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
 };
@@ -49,7 +45,6 @@ export const invalidPatientRequestWithInvalidStatusCodeMock: CreatePatientDto = 
   cdPersonLastName: 'Doe',
   cdPersonAge: 30,
   cdPersonPhone1: '0811231234',
-  emPatientCommitStatusCode: 10,
   crProvinceCode: '00',
   crAmpurCode: '01',
 };
