@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import * as patientMock from '@/tests/mock/patient.mock';
 import { PatientController } from '@controllers/patient.controller';
 import kafkaUtil from '@/utils/kafka';
-import { invalidAuthHeaderMock, validAuthHeaderMock } from '../mock/auth.mock';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));

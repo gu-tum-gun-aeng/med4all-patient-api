@@ -1,7 +1,6 @@
 import { CreatePatientDto } from '@dtos/patient.dto';
 
 export const validPatientRequestWithPersonIDMock: CreatePatientDto = {
-  id: 1,
   cdPersonID: '0000000000000',
   cdPersonFirstName: 'John',
   cdPersonLastName: 'Doe',
@@ -13,7 +12,6 @@ export const validPatientRequestWithPersonIDMock: CreatePatientDto = {
 };
 
 export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
-  id: 1,
   cdPersonForeignID: '0000000000000',
   cdPersonFirstName: 'John',
   cdPersonLastName: 'Doe',
@@ -25,7 +23,6 @@ export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
 };
 
 export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
-  id: 1,
   cdPersonPassportID: '0000000000000',
   cdPersonFirstName: 'John',
   cdPersonLastName: 'Doe',
@@ -37,7 +34,6 @@ export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
 };
 
 export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
-  id: 1,
   cdPersonFirstName: 'John',
   cdPersonLastName: 'Doe',
   cdPersonAge: 30,
@@ -48,7 +44,6 @@ export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
 };
 
 export const invalidPatientRequestWithInvalidStatusCodeMock: CreatePatientDto = {
-  id: 1,
   cdPersonPassportID: '0000000000000',
   cdPersonFirstName: 'John',
   cdPersonLastName: 'Doe',
