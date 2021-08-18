@@ -90,9 +90,6 @@ export class CreatePatientDto {
   public emPatientGotFavipiravirDate?: Date;
 
   @IsNumber()
-  public emPatientCommitStatusCode: number;
-
-  @IsNumber()
   @IsOptional()
   public emPatientCommitTemperature?: number;
 
