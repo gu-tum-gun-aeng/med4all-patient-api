@@ -9,6 +9,7 @@ export const validPatientRequestWithPersonIDMock: CreatePatientDto = {
   emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
+  emMoveFromLocationCode: '',
 };
 
 export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
@@ -20,6 +21,7 @@ export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
   emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
+  emMoveFromLocationCode: '',
 };
 
 export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
@@ -31,6 +33,7 @@ export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
   emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
+  emMoveFromLocationCode: '',
 };
 
 export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
@@ -41,6 +44,7 @@ export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
   emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
+  emMoveFromLocationCode: '',
 };
 
 export const invalidPatientRequestWithInvalidStatusCodeMock: CreatePatientDto = {
@@ -52,4 +56,5 @@ export const invalidPatientRequestWithInvalidStatusCodeMock: CreatePatientDto = 
   emPatientCommitStatusCode: 1,
   crProvinceCode: '00',
   crAmpurCode: '01',
+  emMoveFromLocationCode: '',
 };
