@@ -8,7 +8,7 @@
         "level": "trace"
     },
     "cors": {
-        "origin": true,
+        "origin": "dev.api.med4all.care",
         "credentials": true
     },
     "kafka": {
