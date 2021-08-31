@@ -48,7 +48,7 @@ jobs:
           dockerfile: develop.Dockerfile
           registry: 607128906826.dkr.ecr.ap-southeast-1.amazonaws.com
           image_name: ${{ env.IMAGE_NAME }}
-          image_tag: latest-dev,${{ steps.tag_version.outputs.new_tag }}-dev
+          image_tag: latest-dev,${{ steps.tag_version.outputs.new_tag }}
 
       - name: Create a GitHub release
         uses: actions/create-release@v1
