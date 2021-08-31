@@ -1,4 +1,4 @@
-name: Node-on-push-main
+name: Node-on-push-develop
 
 on:
   push:
