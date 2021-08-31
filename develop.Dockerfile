@@ -5,6 +5,8 @@ COPY . ./app
 
 WORKDIR /app
 
+RUN mv ./config/development.json ./config/production.json
+
 RUN npm install
 
 EXPOSE 3000
@@ -12,6 +14,6 @@ EXPOSE 3000
 # Production build stage
 FROM common-build-stage as production-build-stage
 
-ENV NODE_ENV develop
+ENV NODE_ENV production
 
 CMD ["npm", "run", "start"]
