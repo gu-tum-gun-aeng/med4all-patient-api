@@ -318,7 +318,7 @@ export class CreatePatientDto {
   @IsString()
   @IsOptional()
   public checkInDate?: string;
-  
+
   @IsString()
   @IsOptional()
   public checkOutDate?: string;
