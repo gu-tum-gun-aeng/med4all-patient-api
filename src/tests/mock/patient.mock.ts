@@ -12,7 +12,6 @@ export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
   certificateType: CertificateType.ForeignId,
   name: 'Bruno',
   surname: 'Fernandes',
-
 };
 
 export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
@@ -20,7 +19,6 @@ export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
   certificateType: CertificateType.Passport,
   name: 'Bruno',
   surname: 'Fernandes',
-
 };
 
 export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
@@ -28,7 +26,4 @@ export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
   certificateType: CertificateType.NoDoc,
   name: 'Bruno',
   surname: 'Fernandes',
-
 };
-
-

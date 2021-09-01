@@ -1,7 +1,7 @@
 import { CreatePatientDto } from '@/dtos/patient.dto';
 import { producePatient } from '@/services/kafka/patient.producer';
 import { Request } from 'express';
-import { Body, Controller, HttpCode, Post, Req, UseBefore } from 'routing-controllers';
+import { Body, Controller, HttpCode, Post, Req } from 'routing-controllers';
 
 @Controller()
 export class PatientController {
