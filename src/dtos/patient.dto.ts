@@ -352,6 +352,7 @@ export class CreatePatientDto {
   public emMoveToLocationTypeCode?: string;
 
   @IsString()
+  @IsOptional()
   public emMoveFromLocationCode: string;
 
   @IsString()
