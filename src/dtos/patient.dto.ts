@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested, IsDate } from 'class-validator';
 
 export enum CertificateType {
   PersonalId = 0,
@@ -311,13 +311,13 @@ export class CreatePatientDto {
   @ValidateNested()
   public medicalInfo?: MedicalInfo;
 
-  @IsString()
+  @IsDate()
   @IsOptional()
-  public checkInDate?: string;
+  public checkInDate?: Date;
 
-  @IsString()
+  @IsDate()
   @IsOptional()
-  public checkOutDate?: string;
+  public checkOutDate?: Date;
 
   @IsOptional()
   @Type(() => Address)
