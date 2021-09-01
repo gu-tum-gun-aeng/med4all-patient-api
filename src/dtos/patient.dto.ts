@@ -1,393 +1,362 @@
-import { IsBoolean, IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested } from 'class-validator';
+
+export enum CertificateType {
+  PersonalId = 0,
+  Passport = 1,
+  ForeignId = 2,
+  NoDoc = 3,
+}
+
+export class MedicalInfo {
+  @IsNumber()
+  @IsOptional()
+  public patientCovidClassificationColor?: number;
+
+  @IsBoolean()
+  @IsOptional()
+  public isAtkPositive?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isRtPcrPositive?: boolean;
+
+  @IsString()
+  @IsOptional()
+  public labTestWhen?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  public isFavipiravirReceived?: boolean;
+
+  @IsString()
+  @IsOptional()
+  public receivedFavipiravirWhen?: string;
+
+  @IsNumber()
+  @IsOptional()
+  public bodyTemperatureCelcius?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public pulseRateBpm?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public oxygenSaturation?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public oxygenSaturationAfterExercise?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public oxygenSaturationDifference?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public systolic?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public diastolic?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public inspirationRate?: number;
+
+  @IsBoolean()
+  @IsOptional()
+  public isPregnant?: boolean;
+
+  @IsNumber()
+  @IsOptional()
+  public pregnancyWeeks?: number;
+
+  @IsBoolean()
+  @IsOptional()
+  public isBedridden?: boolean;
+
+  @IsString()
+  @IsOptional()
+  public symptoms?: string;
+
+  @IsString({ each: true })
+  @IsOptional()
+  public allergyToDrugs?: string[];
+
+  @IsString({ each: true })
+  @IsOptional()
+  public allergyToFoods?: string[];
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomShortnessOfBreath?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomFever?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomCough?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomRunnyNose?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomSoreThroat?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomFatigue?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomHeadAche?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomDiarrhea?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomLossOfSmell?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomConjunctivitis?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomRash?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomLossOfTaste?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomTiredness?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomChestPain?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseUncontrollDm?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseCancer?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseCopd?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseAsthma?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseObesity?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseCkdLevelHigherThanFour?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseStrokeWithinSixMonth?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseCardioVascularDisease?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseHiv?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseHypertension?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseHyperlipidemia?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseCirrhosis?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseTuberculosis?: boolean;
+
+  @IsString({ each: true })
+  @IsOptional()
+  public vaccinationRecords?: string[];
+
+  @IsString()
+  @IsOptional()
+  public firstVaccinedDate?: string;
+
+  @IsString()
+  @IsOptional()
+  public secondVaccinedDate?: string;
+
+  @IsString()
+  @IsOptional()
+  public remark?: string;
+
+  @IsString()
+  @IsOptional()
+  public firstDateOfSymtom?: string;
+}
+
+export class Address {
+  @IsNumber()
+  @IsOptional()
+  public provinceCode?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public districtCode?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public subDistrictCode?: number;
+
+  @IsString()
+  @IsOptional()
+  public moo?: string;
+
+  @IsString()
+  @IsOptional()
+  public road?: string;
+
+  @IsString()
+  @IsOptional()
+  public alley?: string;
+
+  @IsString()
+  @IsOptional()
+  public soi?: string;
+
+  @IsString()
+  @IsOptional()
+  public village?: string;
+
+  @IsNumber()
+  @IsOptional()
+  public bangkokZoneCode?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public zipCode?: number;
+
+  @IsString()
+  @IsOptional()
+  public building?: string;
+
+  @IsString()
+  @IsOptional()
+  public note?: string;
+}
 
 export class CreatePatientDto {
   @IsString()
-  @IsOptional()
-  public cdPersonID?: string;
+  public certificateId: string;
+
+  @IsNumber()
+  @IsEnum(CertificateType)
+  public certificateType: CertificateType;
 
   @IsString()
-  @IsOptional()
-  public cdPersonForeignID?: string;
+  public name: string;
 
   @IsString()
-  @IsOptional()
-  public cdPersonPassportID?: string;
+  public surname: string;
 
   @IsNumber()
   @IsOptional()
-  public cdPersonNationalityCode?: number;
+  public gender?: number;
 
   @IsNumber()
   @IsOptional()
-  public cdPersonNameTitleCode?: number;
-
-  @IsString()
-  public cdPersonFirstName: string;
+  public ageYear?: number;
 
   @IsString()
   @IsOptional()
-  public cdPersonMiddleName?: string;
+  public patientPhone?: string;
 
   @IsString()
-  public cdPersonLastName: string;
+  @IsOptional()
+  public custodianPhone?: string;
 
   @IsNumber()
   @IsOptional()
-  public cdPersonGenderCode?: number;
-
-  @IsNumber()
-  public cdPersonAge: number;
-
-  @IsString()
-  @IsOptional()
-  public cdPersonBirthDate?: string;
-
-  @IsString()
-  public cdPersonPhone1: string;
-
-  @IsString()
-  @IsOptional()
-  public cdPersonPhone2?: string;
-
-  @IsString()
-  @IsOptional()
-  public cdPersonCustodialPhone1?: string;
-
-  @IsString()
-  @IsOptional()
-  public cdPersonCustodialPhone2?: string;
+  public weightKg?: number;
 
   @IsNumber()
   @IsOptional()
-  public cdPersonWeightMeasure?: number;
+  public heightCm?: number;
+
+  @IsOptional()
+  @Type(() => MedicalInfo)
+  @ValidateNested()
+  public medicalInfo?: MedicalInfo;
+
+  @IsString()
+  @IsOptional()
+  public checkInDate?: string;
+
+  @IsString()
+  @IsOptional()
+  public checkOutDate?: string;
+
+  @IsOptional()
+  @Type(() => Address)
+  @ValidateNested()
+  public address?: Address;
 
   @IsNumber()
   @IsOptional()
-  public cdPersonHeightMeasure?: number;
+  public patientDataSource?: number;
 
   @IsString()
   @IsOptional()
-  public cdPersonBMIMeasure?: string;
+  public sourceLocation?: string;
 
-  @IsBoolean()
+  @IsString()
   @IsOptional()
-  public emLaboratoryTestATK?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emLaboratoryTestRTPCR?: boolean;
-
-  @IsDate()
-  @IsOptional()
-  public emLaboratoryTestDate?: Date;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientGotFavipiravir?: boolean;
-
-  @IsDate()
-  @IsOptional()
-  public emPatientGotFavipiravirDate?: Date;
+  public admittedTo?: string;
 
   @IsNumber()
   @IsOptional()
-  public emPatientCommitTemperature?: number;
+  public healthCoverage?: number;
+
+  @IsString()
+  @IsOptional()
+  public lineId?: string;
 
   @IsNumber()
   @IsOptional()
-  public emPatientCommitPulse?: number;
+  public homeTown?: number;
 
-  @IsNumber()
+  @IsString({ each: true })
   @IsOptional()
-  public emPatientCommitOxygenSaturation?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientCommitOxygenSaturationPost?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientCommitOxygenSaturationDiff?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientCommitSystolic?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientCommitDiastolic?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientCommitInspirationRate?: number;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientPregnancyStatus?: boolean;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientPregnancyWeeks?: number;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientBedriddenStatus?: boolean;
+  public equipments?: string[];
 
   @IsString()
   @IsOptional()
-  public emPatientSymptomsText?: string;
+  public certificatePictureUrl?: string;
 
   @IsString()
   @IsOptional()
-  public emPatientAllergyDrug?: string;
-
-  @IsString()
-  @IsOptional()
-  public emPatientAllergyFood?: string;
-
-  @IsString()
-  @IsOptional()
-  public emPatientFoodText?: string;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL1?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL2?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL3?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL4?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL5?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL6?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL7?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL8?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL9?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL10?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL11?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL12?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL13?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientSymptomsCL14?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD1?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD2?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD3?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD4?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD5?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD6?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD7?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD8?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD9?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD10?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD11?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD12?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public emPatientDiseaseCD13?: boolean;
-
-  @IsNumber()
-  @IsOptional()
-  public emHICICode?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emHICITypeCode?: number;
-
-  @IsString()
-  @IsOptional()
-  public cdMedicalDoctorCode?: string;
-
-  @IsDate()
-  @IsOptional()
-  public emPatientCheckInDate?: Date;
-
-  @IsDate()
-  @IsOptional()
-  public emPatientCheckOutDate?: Date;
-
-  @IsString()
-  public crProvinceCode: string;
-
-  @IsString()
-  public crAmpurCode: string;
-
-  @IsString()
-  @IsOptional()
-  public crTumbolCode?: string;
-
-  @IsString()
-  @IsOptional()
-  public crMooCode?: string;
-
-  @IsString()
-  @IsOptional()
-  public crRoad?: string;
-
-  @IsString()
-  @IsOptional()
-  public crTrok?: string;
-
-  @IsString()
-  @IsOptional()
-  public crSoi?: string;
-
-  @IsString()
-  @IsOptional()
-  public crVillage?: string;
-
-  @IsNumber()
-  @IsOptional()
-  public crZoneCode?: number;
-
-  @IsString()
-  @IsOptional()
-  public crBuildingName?: string;
-
-  @IsString()
-  @IsOptional()
-  public crAddressText?: string;
-
-  @IsString()
-  @IsOptional()
-  public crGeographicCoordinateLatitude?: string;
-
-  @IsString()
-  @IsOptional()
-  public crGeographicCoordinateLongitude?: string;
-
-  @IsDate()
-  @IsOptional()
-  public emPatientCommitDate?: Date;
-
-  @IsDate()
-  @IsOptional()
-  public emPatientMovementDate?: Date;
-
-  @IsNumber()
-  @IsOptional()
-  public emPatientWaitingHours?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public emSourceNumberCode?: number;
-
-  @IsString()
-  @IsOptional()
-  public emMoveToLocationCode?: string;
-
-  @IsString()
-  @IsOptional()
-  public emMoveToLocationTypeCode?: string;
-
-  @IsString()
-  @IsOptional()
-  public emMoveFromLocationCode: string;
-
-  @IsString()
-  @IsOptional()
-  public emMoveFromLocationTypeCode?: string;
-
-  @IsString()
-  @IsOptional()
-  public emMoveToMethodCode?: string;
-
-  @IsNumber()
-  @IsOptional()
-  public cdOrganizationMedicalUnit?: number;
-
-  @IsString()
-  @IsOptional()
-  public hsPatientHospitalNumber?: string;
-
-  @IsString()
-  @IsOptional()
-  public hsPatientAdmissionNumber?: string;
-
-  @IsNumber()
-  @IsOptional()
-  public hsPatientHealthCoverage?: number;
-
-  @IsDate()
-  @IsOptional()
-  public createdAt?: Date;
-
-  @IsDate()
-  @IsOptional()
-  public updatedAt?: Date;
-
-  @IsDate()
-  @IsOptional()
-  public deletedAt?: Date;
+  public covidTestPictureUrl?: string;
 }
