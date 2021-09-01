@@ -36,14 +36,6 @@ describe('Testing Patient', () => {
       expect(response.status).toBe(200);
     });
 
-    it('using invalid request without any ID should response statusCode 400', async () => {
-      const app = new App([PatientController]);
-      sinon.stub(kafkaUtil, 'send').returns(Promise.resolve([]));
-      const response = await request(app.getServer()).post('/patient').send(patientMock.invalidPatientRequestWithoutAnyIDMock);
-      expect(response.status).toBe(400);
-      expect(response.body.message).toBe('One of PersonID or PassportID or ForeignID is required');
-    });
-
     it('when patient producer got error should response statusCode 500', async () => {
       const app = new App([PatientController]);
       const error = new Error('This is error message');

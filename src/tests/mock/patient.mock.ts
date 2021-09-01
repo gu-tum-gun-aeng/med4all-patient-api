@@ -1,55 +1,34 @@
-import { CreatePatientDto } from '@dtos/patient.dto';
+import { CertificateType, CreatePatientDto } from '@/dtos/patient.dto';
 
 export const validPatientRequestWithPersonIDMock: CreatePatientDto = {
-  cdPersonID: '0000000000000',
-  cdPersonFirstName: 'John',
-  cdPersonLastName: 'Doe',
-  cdPersonAge: 30,
-  cdPersonPhone1: '0811231234',
-  crProvinceCode: '00',
-  crAmpurCode: '01',
-  emMoveFromLocationCode: '',
+  certificateId: '123456',
+  certificateType: CertificateType.PersonalId,
+  name: 'Bruno',
+  surname: 'Fernandes',
 };
 
 export const validPatientRequestWithPersonForeignIDMock: CreatePatientDto = {
-  cdPersonForeignID: '0000000000000',
-  cdPersonFirstName: 'John',
-  cdPersonLastName: 'Doe',
-  cdPersonAge: 30,
-  cdPersonPhone1: '0811231234',
-  crProvinceCode: '00',
-  crAmpurCode: '01',
-  emMoveFromLocationCode: '',
+  certificateId: '123456',
+  certificateType: CertificateType.ForeignId,
+  name: 'Bruno',
+  surname: 'Fernandes',
+
 };
 
 export const validPatientRequestWithPersonPassportIDMock: CreatePatientDto = {
-  cdPersonPassportID: '0000000000000',
-  cdPersonFirstName: 'John',
-  cdPersonLastName: 'Doe',
-  cdPersonAge: 30,
-  cdPersonPhone1: '0811231234',
-  crProvinceCode: '00',
-  crAmpurCode: '01',
-  emMoveFromLocationCode: '',
+  certificateId: '123456',
+  certificateType: CertificateType.Passport,
+  name: 'Bruno',
+  surname: 'Fernandes',
+
 };
 
 export const invalidPatientRequestWithoutAnyIDMock: CreatePatientDto = {
-  cdPersonFirstName: 'John',
-  cdPersonLastName: 'Doe',
-  cdPersonAge: 30,
-  cdPersonPhone1: '0811231234',
-  crProvinceCode: '00',
-  crAmpurCode: '01',
-  emMoveFromLocationCode: '',
+  certificateId: 'Bruno Fernandes',
+  certificateType: CertificateType.NoDoc,
+  name: 'Bruno',
+  surname: 'Fernandes',
+
 };
 
-export const invalidPatientRequestWithInvalidStatusCodeMock: CreatePatientDto = {
-  cdPersonPassportID: '0000000000000',
-  cdPersonFirstName: 'John',
-  cdPersonLastName: 'Doe',
-  cdPersonAge: 30,
-  cdPersonPhone1: '0811231234',
-  crProvinceCode: '00',
-  crAmpurCode: '01',
-  emMoveFromLocationCode: '',
-};
+
