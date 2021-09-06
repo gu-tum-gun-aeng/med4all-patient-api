@@ -402,5 +402,3 @@ export class CreatePatientDto {
   @ValidateNested()
   public riskScore?: Riskscore;
 }
-
-
