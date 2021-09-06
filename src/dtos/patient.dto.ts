@@ -219,14 +219,6 @@ export class MedicalInfo {
 
   @IsBoolean()
   @IsOptional()
-  public isMedicineRequested?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public isBypassScreening?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
   public isSymptomSevereCough?: boolean;
 
   @IsBoolean()
@@ -396,6 +388,14 @@ export class CreatePatientDto {
   @IsString()
   @IsOptional()
   public trustedSource?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  public isMedicineRequested?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isBypassScreening?: boolean;
 
   @IsOptional()
   @Type(() => Riskscore)
