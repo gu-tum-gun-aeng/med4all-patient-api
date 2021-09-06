@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested, IsDate } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested, IsDate, isNumber } from 'class-validator';
 
 export enum CertificateType {
   PersonalId = 0,
@@ -35,7 +35,7 @@ export class MedicalInfo {
 
   @IsNumber()
   @IsOptional()
-  public bodyTemperatureCelcius?: number;
+  public bodyTemperatureCelsius?: number;
 
   @IsNumber()
   @IsOptional()
@@ -147,7 +147,7 @@ export class MedicalInfo {
 
   @IsBoolean()
   @IsOptional()
-  public isDiseaseUncontrollDm?: boolean;
+  public isDiseaseUncontrolledDm?: boolean;
 
   @IsBoolean()
   @IsOptional()
@@ -203,11 +203,11 @@ export class MedicalInfo {
 
   @IsString()
   @IsOptional()
-  public firstVaccinedDate?: string;
+  public firstVaccinatedWhen?: string;
 
   @IsString()
   @IsOptional()
-  public secondVaccinedDate?: string;
+  public secondVaccinatedWhen?: string;
 
   @IsString()
   @IsOptional()
@@ -215,7 +215,35 @@ export class MedicalInfo {
 
   @IsString()
   @IsOptional()
-  public firstDateOfSymtom?: string;
+  public firstSymptomWhen?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  public isMedicineRequested?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isBypassScreening?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomSevereCough?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomPoorAppetite?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomFatique?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isDiseaseESRD?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isSymptomGI?: boolean;
 }
 
 export class Address {
@@ -268,6 +296,21 @@ export class Address {
   public note?: string;
 }
 
+export class Riskscore {
+  @IsString()
+  @IsOptional()
+  public inclusionLabel?: string;
+
+  @IsString()
+  @IsOptional()
+  public inclusionLabelType?: string;
+
+  @IsNumber()
+  @IsOptional()
+  public triageScore?: number;
+
+}
+
 export class CreatePatientDto {
   @IsString()
   public certificateId: string;
@@ -313,11 +356,11 @@ export class CreatePatientDto {
 
   @IsDate()
   @IsOptional()
-  public checkInDate?: Date;
+  public checkInWhen?: Date;
 
   @IsDate()
   @IsOptional()
-  public checkOutDate?: Date;
+  public checkOutWhen?: Date;
 
   @IsOptional()
   @Type(() => Address)
@@ -327,10 +370,6 @@ export class CreatePatientDto {
   @IsNumber()
   @IsOptional()
   public patientDataSource?: number;
-
-  @IsString()
-  @IsOptional()
-  public sourceLocation?: string;
 
   @IsString()
   @IsOptional()
@@ -354,9 +393,16 @@ export class CreatePatientDto {
 
   @IsString()
   @IsOptional()
-  public certificatePictureUrl?: string;
+  public nhso_ticket_id?: string;
 
   @IsString()
   @IsOptional()
-  public covidTestPictureUrl?: string;
+  public trustedSource?: string;
+  
+  @IsOptional()
+  @Type(() => Riskscore)
+  @ValidateNested()
+  public riskScore?: Riskscore;
 }
+
+
