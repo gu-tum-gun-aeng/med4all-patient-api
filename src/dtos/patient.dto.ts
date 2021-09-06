@@ -393,12 +393,12 @@ export class CreatePatientDto {
 
   @IsString()
   @IsOptional()
-  public nhso_ticket_id?: string;
+  public nhsoTicketId?: string;
 
   @IsString()
   @IsOptional()
   public trustedSource?: string;
-  
+
   @IsOptional()
   @Type(() => Riskscore)
   @ValidateNested()
