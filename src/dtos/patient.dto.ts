@@ -308,7 +308,6 @@ export class Riskscore {
   @IsNumber()
   @IsOptional()
   public triageScore?: number;
-
 }
 
 export class CreatePatientDto {
@@ -396,5 +395,3 @@ export class CreatePatientDto {
   @ValidateNested()
   public riskScore?: Riskscore;
 }
-
-
