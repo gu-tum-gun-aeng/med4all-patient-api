@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested, IsDate, isNumber } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString, IsEnum, ValidateNested, IsDate } from 'class-validator';
 
 export enum CertificateType {
   PersonalId = 0,
@@ -236,6 +236,14 @@ export class MedicalInfo {
   @IsBoolean()
   @IsOptional()
   public isSymptomGI?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isMedicineRequested?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isBypassScreening?: boolean;
 }
 
 export class Address {
@@ -388,14 +396,6 @@ export class CreatePatientDto {
   @IsString()
   @IsOptional()
   public trustedSource?: string;
-
-  @IsBoolean()
-  @IsOptional()
-  public isMedicineRequested?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  public isBypassScreening?: boolean;
 
   @IsOptional()
   @Type(() => Riskscore)
