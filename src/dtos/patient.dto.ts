@@ -244,6 +244,14 @@ export class MedicalInfo {
   @IsBoolean()
   @IsOptional()
   public isBypassScreening?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isBedRequested?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  public isOxygenRequested?: boolean;
 }
 
 export class Address {
