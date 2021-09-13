@@ -405,6 +405,10 @@ export class CreatePatientDto {
   @IsOptional()
   public trustedSource?: string;
 
+  @IsString()
+  @IsOptional()
+  public sourceLocation?: string;
+
   @IsOptional()
   @Type(() => Riskscore)
   @ValidateNested()
