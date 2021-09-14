@@ -255,15 +255,19 @@ export class MedicalInfo {
 }
 
 export class Address {
-  @IsNumber()
+  @IsString()
+  @IsOptional()
+  public addressDetail?: string;
+
+  @IsString()
   @IsOptional()
   public province?: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
   public district?: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
   public subDistrict?: string;
 
@@ -287,7 +291,7 @@ export class Address {
   @IsOptional()
   public village?: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
   public bangkokZone?: string;
 
