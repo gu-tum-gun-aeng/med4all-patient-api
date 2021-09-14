@@ -235,7 +235,7 @@ export class MedicalInfo {
 
   @IsBoolean()
   @IsOptional()
-  public isSymptomGI?: boolean;
+  public isSymptomGi?: boolean;
 
   @IsBoolean()
   @IsOptional()
