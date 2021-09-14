@@ -257,15 +257,15 @@ export class MedicalInfo {
 export class Address {
   @IsNumber()
   @IsOptional()
-  public provinceCode?: number;
+  public province?: string;
 
   @IsNumber()
   @IsOptional()
-  public districtCode?: number;
+  public district?: string;
 
   @IsNumber()
   @IsOptional()
-  public subDistrictCode?: number;
+  public subDistrict?: string;
 
   @IsString()
   @IsOptional()
@@ -289,7 +289,7 @@ export class Address {
 
   @IsNumber()
   @IsOptional()
-  public bangkokZoneCode?: number;
+  public bangkokZone?: string;
 
   @IsNumber()
   @IsOptional()
@@ -407,7 +407,7 @@ export class CreatePatientDto {
 
   @IsString()
   @IsOptional()
-  public sourceLocation?: string;
+  public sourceName?: string;
 
   @IsOptional()
   @Type(() => Riskscore)
